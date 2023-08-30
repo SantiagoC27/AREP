@@ -68,4 +68,7 @@ public class WebService {
 
         return content.toString();
     }
+    public byte[] readImage(String fileName) throws IOException {
+        return Thread.currentThread().getContextClassLoader().getResourceAsStream("public/" + fileName).readAllBytes();
+    }
 }
