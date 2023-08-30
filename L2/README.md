@@ -1,6 +1,6 @@
 # Laboratorio 2
 
-Implementación sobre un servidor de fachada que consume una API REST que traera datos de las películas que se encuentren en el sistema.
+TALLER DISEÑO Y ESTRUCTURACIÓN DE APLICACIONES DISTRIBUIDAS EN INTERNET.
 
 ## Compile
 
@@ -18,26 +18,25 @@ mvn compile
 
 ## Run server
 
-1. Para ejecutar el servidor, una vez realizados los pasos anteriores use el siguiente comando en caso de fallo usar el segundo
+1. Para ejecutar el servidor, una vez realizados los pasos anteriores nos ubicamos en la carpeta L2 y ejecutamos
 
 ```
 mvn exec:java
 ```
 
-```
-mvn compile exec:java
-```
+2. Para acceder a la pagina una vez realizado el paso anterior iremos al navegador de nuestra preferencia y escribimos localHost:35000.
 
-2. Para acceder a la pagina una vez realizado el paso anterior abre el index.html, y ya puede buscar la informacion de la pelicula que desee.
+3. Esto por defectno los llevara al index de la pagina que sera igual al la del Laboratorio 1 solo que esta vez lo busca dentro del los archivos del servidor.
+
+4. Adicional a ello tendremos 2 nuevas rutas la primera -/file/{nombreArchivo}- y -/img/{nombreImagen}- 
 
 
 ## Test
 
-Para ejecutar las pruebas unitarias
-
-```
-mvn test
-```
+Para los test una vez corrida la aplicación iremos a las sigueintes rutas:
+	-- localhost:35000/file/prueba.txt
+	-- localhost:3500/img/pikachu.png
+La primera abrirar un archivo de texto plano y la segundo una imagen de pikachu, ambos archivos se encuentran dentro de la carpeta resources/public que esta dentro de la aplicacion.
 
 ## Author
 
