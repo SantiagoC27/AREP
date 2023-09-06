@@ -1,45 +1,51 @@
-# Laboratorio 2
+# Laboratorio 3
 
-TALLER DISEÑO Y ESTRUCTURACIÓN DE APLICACIONES DISTRIBUIDAS EN INTERNET.
+Implementación de un mini spark.
 
-## Compile
+## Arquitectura
 
-Primero vamos a clonar el repositorio usando el comando
-```
-git clone https://github.com/SantiagoC27/AREP-2023-2.git
-```
-Acontinuacion abriremos el projecto con el editor de codigo de su preferencia, este puede ser visual studio, intelliJ entre otro y ejecutamos los siguiente comando
+*MiniSpark.java: Esta sera la nueva clase que actuara como un Spark, adquiere toda la logica de server e implementa la suya propia.*
+
+Es similar a lo que se tenia antes con la diferencia de que el acceso a los diferentes paths se dara atravez de funciones lambda, permitiendo agregar mas endPoints de manera mas controlada y sencilla
+
+## Instalación
+
+Se necesita un SDK y Maven para instalar el proyecto. Una vez instalado, se puede descargar el proyecto y ejecutar los siguientes comandos para compilar e iniciar el servidor:
+
 ```
 mvn package -Dskiptests
-```
-```
 mvn compile
 ```
 
-## Run server
+## Ejecución
 
-1. Para ejecutar el servidor, una vez realizados los pasos anteriores nos ubicamos en la carpeta L2 y ejecutamos
+Para ejecutar el servidor, se debe ejecutar el siguiente comando en la carpeta del servidor:
 
 ```
-mvn exec:java
+mvn compile exec:java
 ```
 
-2. Para acceder a la pagina una vez realizado el paso anterior iremos al navegador de nuestra preferencia y escribimos localHost:35000.
+Para abrir la página web, se debe abrir la siguiente URL en el navegador:
 
-3. Esto por defectno los llevara al index de la pagina que sera igual al la del Laboratorio 1 solo que esta vez lo busca dentro del los archivos del servidor.
+```
+http://localhost:35000/index
+```
 
-4. Adicional a ello tendremos 2 nuevas rutas la primera -/file/{nombreArchivo}- y -/img/{nombreImagen}- 
+## Pruebas
+
+Para la ruta post usaremos un programa como postman o similares que permitan ralizar peticiones y usaremos la URL:
+http://localhost:35000/post
+
+Entre los diferentes gets que tenemos se encuentra:
+
+-Archivos: http://localhost:35000/files?={nombreDelArchivo}
+
+-Imagenes: http://localhost:35000/img?={nombreDeLaImagen}
+
+-Peliculas: http://localhost:35000/movies?={nombreDeLaPelicula}
 
 
-## Test
-
-Para los test una vez corrida la aplicación iremos a las sigueintes rutas:
-	-- localhost:35000/file/prueba.txt
-	-- localhost:3500/img/pikachu.png
-La primera abrirar un archivo de texto plano y la segundo una imagen de pikachu, ambos archivos se encuentran dentro de la carpeta resources/public que esta dentro de la aplicacion.
 
 ## Author
 
-Santiago Cárdenas Amaya
-
-
+Santiago Cardenas Amaya

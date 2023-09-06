@@ -68,7 +68,7 @@
 			//Funcion para llamar al servidor y con la URL local
 			function loadGetMsg() {
 				let nameVar = document.getElementById("name").value;
-				const url = `http://localhost:35000/movie?name=${nameVar}`;
+				const url = `http://localhost:35000/movies?name=${nameVar}`;
 				const xhttp = new XMLHttpRequest();
 				xhttp.onload = function() {
 						const responseData = JSON.parse(this.responseText);
