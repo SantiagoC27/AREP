@@ -1,4 +1,4 @@
-package arep.spring;
+package arep.spring.Anotaciones;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,4 +9,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface GetMapping {
     String value();
+    String contentType() default "text/plain";
 }
