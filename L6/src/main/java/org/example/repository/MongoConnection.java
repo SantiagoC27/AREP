@@ -1,36 +1,47 @@
 package org.example.repository;
 
-import com.mongodb.MongoClient;
-import com.mongodb.MongoURI;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.MongoException;
+import com.mongodb.client.*;
 import org.bson.Document;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.codecs.pojo.PojoCodecProvider;
 import org.example.models.Message;
-
-import com.mongodb.MongoClientURI;
 
 import java.util.Date;
 
+import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
+import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
+
 public class MongoConnection {
 
-    private MongoClientURI uri;
-    private MongoClient client;
+    private ConnectionString uri;
     private MongoDatabase database;
 
     public MongoConnection(){
-        String host = "cluster0.boebnnz.mongodb.net";
-        int port = 27017; // El puerto por defecto de MongoDB
-        String username = "cardenassantiago27";
-        String password = "1Sv2TEQkaaznWqAQ";
-        String databaseName = "db";
+        uri = new ConnectionString("mongodb+srv://cardenassantiago27:1Sv2TEQkaaznWqAQ@cluster0.hlxwhhg.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp");
+        String dbname = "SparkMongodb";
 
-        uri = new MongoClientURI("mongodb://" + username + ":" + password + "@" + host + ":" + port + "/?retryWrites=true&w=majority&appName=AtlasApp");
-        client = new MongoClient(uri);
-        database = client.getDatabase(databaseName);
+        CodecRegistry pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
+                fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+
+        MongoClientSettings settings = MongoClientSettings.builder()
+                .codecRegistry(pojoCodecRegistry)
+                .applyConnectionString(uri).build();
+
+        MongoClient mongoClient = null;
+        try {
+            mongoClient = MongoClients.create(settings);
+        } catch (MongoException me){
+            System.err.println("No se puede conectar con mongo: " + me);
+            System.exit(1);
+        }
+
+        database = mongoClient.getDatabase(dbname);
     }
     public void insertMessage(Message message) {
-        MongoCollection<Document> collection = database.getCollection("Message");
+        MongoCollection<Document> collection = database.getCollection("Mensajes");
         Document document = new Document()
                 .append("mensaje", message.getMessage())
                 .append("usuario", message.getUser())
@@ -39,7 +50,7 @@ public class MongoConnection {
     }
 
     public String getData() {
-        MongoCollection<Document> collection = database.getCollection("Message");
+        MongoCollection<Document> collection = database.getCollection("Mensajes");
         StringBuilder messageBuilder = new StringBuilder();
         FindIterable<Document> iterable = collection.find();
 
