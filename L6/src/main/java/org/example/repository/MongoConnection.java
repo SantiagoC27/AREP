@@ -20,7 +20,8 @@ public class MongoConnection {
     private MongoDatabase database;
 
     public MongoConnection(){
-        uri = new ConnectionString("mongodb+srv://cardenassantiago27:1Sv2TEQkaaznWqAQ@cluster0.hlxwhhg.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp");
+        //Uri local
+        uri =new ConnectionString("mongodb://localhost:27017");
         String dbname = "SparkMongodb";
 
         CodecRegistry pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
